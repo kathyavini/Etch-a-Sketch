@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Montserrat&display=swap');
+
+* {
+    /* border: 2px solid black; */
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: #c6cdc6;
+    min-height: 100vh;
+    min-width: 100vw;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    max-height: 900px;
+    max-width: 1440px;
+    background-image: url("./right-background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 2fr 6fr 1fr;
+    grid-template-areas:
+        "..........   title       title"
+        "..........   board       options"
+        "attribution  ........    .......";
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    color: #b9a67b;
+    
+}
+
+header {
+    font-family: 'Cormorant', serif;
+    font-size: 3rem;
+    grid-area: title;
+    padding-top: 2rem;
+}
+
+main {
+    grid-area: board;
+}
+
+.grid {
+    width: 450px;
+    height: 450px;
+    border: 2px solid #b9a67b;
+    display: grid;
+}
+
+.grid div {
+    border: 1px solid #b9a67b5a;
+}
+
+.options {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: space-around;
+    grid-area: options;
+}
+
+.options h2 {
+    color: #6F6F6F;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+}
+
+.grid-buttons {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.options button {
+    background-color:#4D7558;
+    color: white;
+    width: 100px;
+    margin: 40px 5px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+}
+
+.options img {
+    width: 120px;
+    height: auto;
+    margin: 10px;
+}
+
+.options .selected {
+    border: 2px black solid;
+}
+
+footer {
+    grid-area: attribution;
+    display: flex;
+    flex-flow: column nowrap;
+    flex: 1 0 auto;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+footer a {
+    color: #b9a67b;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #b9a67b;
+    text-decoration: underline;
+}
+
+footer img {
+    height: 1.2rem;
+    width: auto;
+}
