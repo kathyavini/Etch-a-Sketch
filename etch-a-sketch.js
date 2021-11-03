@@ -1,6 +1,3 @@
-let colorArray = ["#4d7558","#b3d686","#b9a67b","#C5DCCC","#739c55", "#F7F9F4", '#A5C092'];
-
-
 // Add event listeners to grid-layout buttons
 const grid9 = document.querySelector('.grid9');
 grid9.addEventListener('click', () => {
@@ -23,38 +20,46 @@ const autumn = document.querySelector('.autumn-palette');
 autumn.addEventListener('click', () => {
     clearGrid();
     setColorArray('autumn');
-    autumn.classList.add('selected');
-    theme.classList.remove('selected');
 });
 
 const theme = document.querySelector('.theme-palette');
-theme.classList.add('selected');
 theme.addEventListener('click', () => {
     clearGrid();
     setColorArray('theme');
-    theme.classList.add('selected');
-    autumn.classList.remove('selected');
 });
 
+// Start with the Theme Palette
+setColorArray('theme');
+
+// Pick from one of the two layouts
+if (Math.floor(Math.random()*2)) {
+    changeLayout();
+}
+
+
+
 function setColorArray(palette) {
+    while (document.querySelector('.selected')) {
+        document.querySelector('.selected').classList.remove('selected');
+    }
     switch(palette) {
         case 'autumn':
             colorArray = ["#03071e","#370617","#6a040f","#9d0208","#d00000","#dc2f02","#e85d04","#f48c06","#faa307","#ffba08"];
+            autumn.classList.add('selected');
             break;
         case 'theme':
             colorArray = ["#4d7558","#b3d686","#b9a67b","#C5DCCC","#739c55", "#F7F9F4", '#A5C092'];
+            theme.classList.add('selected');
             break;
     }
 }
 
-// Create an n x n Grid in the container element
+
 function createGrid(n) {
     const grid = document.querySelector('.grid');
-    // Clear previous grid
     while (grid.firstChild) {
         grid.removeChild(grid.firstChild);
     }
-    // Use CSS grid to place elements
     grid.style.gridTemplate = 
         `repeat(${n}, 1fr) / repeat(${n}, 1fr)`;
     for (let i = 1; i <= n*n; i++) {
@@ -74,23 +79,28 @@ function colorChangeOnPointerEnter() {
     });
 }
 
-// colorArray = ["#4d7558","#b3d686","#b9a67b","#C5DCCC","#739c55", "#F7F9F4"];
 
-// Autumn pallette
-// colorArray = ["#03071e","#370617","#6a040f","#9d0208","#d00000","#dc2f02","#e85d04","#f48c06","#faa307","#ffba08"]
 
-// //Purple Green Palette
-// ["#7400b8","#6930c3","#5e60ce","#5390d9","#4ea8de","#48bfe3","#56cfe1","#64dfdf","#72efdd","#80ffdb"];
-
-// Select a random color from the colorArray
 function pickColor() {
-    color = colorArray[Math.floor(Math.random()*colorArray.length)];
+    // Select a random color from the colorArray
+    let color = colorArray[Math.floor(Math.random()*colorArray.length)];
     return color;
 }
 
-// Clear background colors from the grid
+
 function clearGrid() {
-    targets = document.querySelectorAll('.grid div');
+    const targets = document.querySelectorAll('.grid div');
+    // Clear background colors from the grid
     targets.forEach((target) => { 
         target.style.backgroundColor = ''; })
+}
+
+// Toggle between two desktop layouts
+function changeLayout() {
+    let container = document.querySelector('.container');
+    let header = document.querySelector('header');
+    let options = document.querySelector('.options');
+    container.classList.toggle('layout2');
+    header.classList.toggle('layout2');
+    options.classList.toggle('layout2');
 }

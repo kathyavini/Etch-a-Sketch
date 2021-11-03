@@ -17,7 +17,7 @@ body {
     align-items: center;
 }
 
-.container {
+ .container {
     max-height: 900px;
     max-width: 1440px;
     background-image: url("./right-background.png");
@@ -26,7 +26,7 @@ body {
     background-position: top;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 2fr 6fr 1fr;
+    grid-template-rows: 3fr 6fr 1fr;
     grid-template-areas:
         "..........   title       title"
         "..........   board       options"
@@ -35,14 +35,30 @@ body {
     font-family: 'Montserrat', sans-serif;
     font-size: 1.5rem;
     color: #b9a67b;
+    box-shadow: 0 5px 25px 5px rgba(0,0,0, .4);
+}
+
+.container.layout2 {
+    background-image: url("./left-background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
+    grid-template-areas:
+        "..........   ......  ......"
+        " title   board       options"
+        " title  attribution  options";
     
 }
 
-header {
+ header {
     font-family: 'Cormorant', serif;
     font-size: 3rem;
     grid-area: title;
     padding-top: 2rem;
+}
+
+header.layout2 {
+    align-self: center;
 }
 
 main {
@@ -60,12 +76,17 @@ main {
     border: 1px solid #b9a67b5a;
 }
 
-.options {
+ .options {
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
     justify-content: space-around;
     grid-area: options;
+}
+
+.options.layout2 {
+    justify-content: center;
+    align-self: center;
 }
 
 .options h2 {
