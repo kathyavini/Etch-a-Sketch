@@ -28,9 +28,9 @@ body {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 3fr 6fr 1fr;
     grid-template-areas:
-        "..........   title       title"
-        "..........   board       options"
-        "attribution  ........    .......";
+        ".....   title   title"
+        "attrb   board   options"
+        ".....   .....   .......";
     text-align: center;
     font-family: 'Montserrat', sans-serif;
     font-size: 1.5rem;
@@ -44,10 +44,9 @@ body {
     background-repeat: no-repeat;
     background-position: top;
     grid-template-areas:
-        "..........   ......  ......"
-        " title   board       options"
-        " title  attribution  options";
-    
+        ".....  .....   ...."
+        "title  board   options"
+        "....   .....   attrb";
 }
 
  header {
@@ -97,14 +96,16 @@ main {
 
 .grid-buttons {
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: row wrap;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px 0px 40px 0px;
 }
 
 .options button {
     background-color:#4D7558;
     color: white;
     width: 100px;
-    margin: 40px 5px;
     padding: 10px 20px;
     border-radius: 5px;
     border: none;
@@ -121,7 +122,8 @@ main {
 }
 
 footer {
-    grid-area: attribution;
+    align-self: end;
+    grid-area: attrb;
     display: flex;
     flex-flow: column nowrap;
     flex: 1 0 auto;
@@ -129,6 +131,11 @@ footer {
     align-items: center;
     font-size: 1.2rem;
 }
+
+footer.layout2 {
+    align-self: center;
+}
+
 
 footer a {
     color: #b9a67b;
@@ -143,4 +150,34 @@ footer a:hover {
 footer img {
     height: 1.2rem;
     width: auto;
+}
+
+/* For medium screens */
+@media screen and (max-width: 1200px) {
+    .container {
+        width: 100%;
+        height: 100%;
+        grid-template-columns: 1fr 3fr 2fr 1fr;
+        grid-template-rows: 3fr 6fr 1fr;
+        grid-template-areas:
+            "... title     title       ..."
+            "... board     options     ..."
+            "... attrb     options     ...";
+    }
+
+    header,
+    footer {
+        align-self: center;
+    }
+
+    .container.layout2 {
+        width: 100%;
+        height: 100%;
+        grid-template-columns: 1fr 3fr 2fr 1fr;
+        grid-template-rows: 3fr 6fr 1fr;
+        grid-template-areas:
+            "... title     title       ..."
+            "... board     options     ..."
+            "... attrb     options     ...";
+    }
 }

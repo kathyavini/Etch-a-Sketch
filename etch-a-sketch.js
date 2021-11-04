@@ -31,12 +31,10 @@ theme.addEventListener('click', () => {
 // Start with the Theme Palette
 setColorArray('theme');
 
-// Pick from one of the two layouts
+//Pick from one of the two layouts
 if (Math.floor(Math.random()*2)) {
     changeLayout();
 }
-
-
 
 function setColorArray(palette) {
     while (document.querySelector('.selected')) {
@@ -79,14 +77,11 @@ function colorChangeOnPointerEnter() {
     });
 }
 
-
-
 function pickColor() {
     // Select a random color from the colorArray
     let color = colorArray[Math.floor(Math.random()*colorArray.length)];
     return color;
 }
-
 
 function clearGrid() {
     const targets = document.querySelectorAll('.grid div');
@@ -95,12 +90,14 @@ function clearGrid() {
         target.style.backgroundColor = ''; })
 }
 
-// Toggle between two desktop layouts
+// Toggle between two layouts
 function changeLayout() {
     let container = document.querySelector('.container');
     let header = document.querySelector('header');
     let options = document.querySelector('.options');
+    let footer = document.querySelector('footer');
     container.classList.toggle('layout2');
     header.classList.toggle('layout2');
     options.classList.toggle('layout2');
+    footer.classList.toggle('layout2');
 }
