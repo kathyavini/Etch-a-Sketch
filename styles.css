@@ -181,3 +181,76 @@ footer img {
             "... attrb     options     ...";
     }
 }
+
+/* For mobile */
+@media screen and (max-width: 600px) {
+    html {
+        overflow-x: hidden;
+        overflow-y: hidden;
+    }
+    
+    body {
+        height: 100vh;
+        width: 100vw;
+        overflow-x: hidden;
+        overflow-y: hidden;
+    }
+
+    /* The scroll-snap properties are exactly as for
+    my Rock Paper Scissors (a game with horizontal scroll)
+    except here the flex-wrap has been set to wrap to make
+    columns and to let me distribute the items as I wanted.
+    scroll-snap-type must still be set to x, not y. */ 
+    .container {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        gap: 5vw;
+        overflow-y: auto;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+    }
+
+    header {
+        width: 100vw;
+        scroll-snap-align: start;
+        flex: none;
+        padding-top: 20vh;
+        font-size: 2rem;
+        order: 0;
+    }
+
+    .palette {
+        order: 1;
+        padding-top: 5vh;
+    }
+
+    .dimensions {
+        order: 2;
+        scroll-snap-align: start;
+        padding-top: 10vh;
+    }
+
+    main {
+        width: 100vw;
+        flex: none;
+        display: grid;
+        place-items: center;
+        order: 2;
+    }
+
+    .grid {
+        max-width: 90vw;
+        max-height: 90vw;
+    }
+
+    footer {
+        width: 100vw;
+        height: 100vh;
+        scroll-snap-align: start;
+        flex: none;
+        order: 3;
+    }
+}
