@@ -51,9 +51,9 @@ body {
 
  header {
     font-family: 'Cormorant', serif;
-    font-size: 3rem;
+    font-size: clamp(2.5rem, 6vw, 3rem);
     grid-area: title;
-    padding-top: 2rem;
+    padding-top: 10vh;
 }
 
 header.layout2 {
@@ -90,7 +90,7 @@ main {
 
 .options h2 {
     color: #6F6F6F;
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 4vw, 2.5rem) ;
     text-transform: uppercase;
 }
 
@@ -196,28 +196,23 @@ footer img {
         overflow-y: hidden;
     }
 
-    /* The scroll-snap properties are exactly as for
-    my Rock Paper Scissors (a game with horizontal scroll)
-    except here the flex-wrap has been set to wrap to make
-    columns and to let me distribute the items as I wanted.
-    scroll-snap-type must still be set to x, not y. */ 
     .container {
         height: 100%;
         width: 100%;
         display: flex;
-        flex-flow: row wrap;
+        flex-flow: column nowrap;
         align-items: center;
         gap: 5vw;
         overflow-y: auto;
         overflow-x: auto;
-        scroll-snap-type: x mandatory;
+        scroll-snap-type: y mandatory;
     }
 
     header {
         width: 100vw;
         scroll-snap-align: start;
         flex: none;
-        padding-top: 20vh;
+        padding-top: 25vh;
         font-size: 2rem;
         order: 0;
     }
@@ -225,12 +220,14 @@ footer img {
     .palette {
         order: 1;
         padding-top: 5vh;
+        margin-top: 15vh;
     }
 
     .dimensions {
         order: 2;
         scroll-snap-align: start;
         padding-top: 10vh;
+        margin-top: 15vh;
     }
 
     main {
