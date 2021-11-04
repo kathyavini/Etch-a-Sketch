@@ -1,18 +1,17 @@
+const grid = document.querySelector('.grid');
+
 // Add event listeners to grid-layout buttons
 const grid9 = document.querySelector('.grid9');
 grid9.addEventListener('click', () => {
     createGrid(9);
-    colorChangeOnPointerEnter();
     });
 const grid16 = document.querySelector('.grid16');
 grid16.addEventListener('click', () => {
     createGrid(16);
-    colorChangeOnPointerEnter();
     });
 const grid25 = document.querySelector('.grid25');
 grid25.addEventListener('click', () => {
     createGrid(25);
-    colorChangeOnPointerEnter();
     });
 
 // Add event listeners to palette selectors
@@ -31,7 +30,7 @@ theme.addEventListener('click', () => {
 // Start with the Theme Palette
 setColorArray('theme');
 
-//Pick from one of the two layouts
+//Pick randomly from one of the two layouts upon load
 if (Math.floor(Math.random()*2)) {
     changeLayout();
 }
@@ -52,9 +51,7 @@ function setColorArray(palette) {
     }
 }
 
-
 function createGrid(n) {
-    const grid = document.querySelector('.grid');
     while (grid.firstChild) {
         grid.removeChild(grid.firstChild);
     }
@@ -63,17 +60,35 @@ function createGrid(n) {
     for (let i = 1; i <= n*n; i++) {
         let div = document.createElement('div');
         div.classList.add(`div${i}`);
+        div.classList.add(`generatedDiv`)
         grid.appendChild(div);
     }
+    // Add both kinds on event listener
+    colorChangeOnPointerEnter();
+    colorChangeOnTouch();
 }
 
-// Add eventListeners for pointer entry
+// Add pointer functionality (mouse or tap)
 function colorChangeOnPointerEnter() {
     const targets = document.querySelectorAll('.grid div');
     targets.forEach((target) => {
         target.addEventListener('pointerenter', function() {
             target.style.backgroundColor = pickColor();
         });
+    });
+}
+
+// Touch functionality
+function colorChangeOnTouch() {
+    let lastDiv;
+    grid.addEventListener("touchmove", (ev) => {
+        touchedDiv = document.elementFromPoint(ev.touches[0].clientX, 
+                ev.touches[0].clientY);
+            if (touchedDiv && touchedDiv.classList.contains('generatedDiv') && 
+                !(touchedDiv === lastDiv)) {
+            touchedDiv.style.backgroundColor = pickColor();
+            lastDiv = touchedDiv;
+        }
     });
 }
 
@@ -92,10 +107,10 @@ function clearGrid() {
 
 // Toggle between two layouts
 function changeLayout() {
-    let container = document.querySelector('.container');
-    let header = document.querySelector('header');
-    let options = document.querySelector('.options');
-    let footer = document.querySelector('footer');
+    const container = document.querySelector('.container');
+    const header = document.querySelector('header');
+    const options = document.querySelector('.options');
+    const footer = document.querySelector('footer');
     container.classList.toggle('layout2');
     header.classList.toggle('layout2');
     options.classList.toggle('layout2');

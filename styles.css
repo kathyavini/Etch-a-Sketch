@@ -69,6 +69,7 @@ main {
     height: 450px;
     border: 2px solid #b9a67b;
     display: grid;
+    touch-action: pinch-zoom;
 }
 
 .grid div {
