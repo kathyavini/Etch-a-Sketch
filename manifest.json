@@ -1,0 +1,19 @@
+{
+    "short_name": "Etch-a-Sketch",
+    "name": "Etch-a-Sketch: A beautiful doodler in plain CSS and JS",
+    "icons": [
+      {
+        "src": "./metadata/tree-pad_x192.png",
+        "type": "image/png",
+        "sizes": "192x192",
+        "purpose": "any maskable"
+      },
+      {
+        "src": "./metadata/tree-pad_x512.png",
+        "type": "image/png",
+        "sizes": "512x512",
+        "purpose": "any maskable"
+      }
+    ],
+    "description": "A pretty doodler in plain CSS and JavaScript"
+  }
