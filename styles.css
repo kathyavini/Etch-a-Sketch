@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Montserrat&display=swap');
 
+:root {
+    --thisREM: calc(1rem/1);
+}
+
 * {
     /* border: 2px solid black; */
     box-sizing: border-box;
@@ -213,7 +217,8 @@ footer img {
         width: 100vw;
         scroll-snap-align: start;
         flex: none;
-        padding-top: 25vh;
+        /* decrease margin as system font size increases */
+        padding-top: calc(30vh - 3rem);
         font-size: 2rem;
         order: 0;
     }
@@ -221,7 +226,8 @@ footer img {
     .palette {
         order: 1;
         padding-top: 5vh;
-        margin-top: 15vh;
+        /* decrease margin as system font size increases */
+        margin-top: calc(25vh - 6rem);
     }
 
     .dimensions {
