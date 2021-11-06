@@ -161,7 +161,7 @@ footer img {
 @media screen and (max-width: 1200px) {
     .container {
         width: 100%;
-        height: 100%;
+        min-height: auto;
         grid-template-columns: 1fr 3fr 2fr 1fr;
         grid-template-rows: 3fr 6fr 1fr;
         grid-template-areas:
@@ -177,7 +177,7 @@ footer img {
 
     .container.layout2 {
         width: 100%;
-        height: 100%;
+        min-height: auto;
         grid-template-columns: 1fr 3fr 2fr 1fr;
         grid-template-rows: 3fr 6fr 1fr;
         grid-template-areas:
