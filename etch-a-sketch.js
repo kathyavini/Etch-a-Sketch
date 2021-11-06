@@ -59,16 +59,16 @@ function createGrid(n) {
         `repeat(${n}, 1fr) / repeat(${n}, 1fr)`;
     for (let i = 1; i <= n*n; i++) {
         let div = document.createElement('div');
-        div.classList.add(`div${i}`);
+        // div.classList.add(`div${i}`); // Nice for troubleshooting
         div.classList.add(`generatedDiv`)
         grid.appendChild(div);
     }
-    // Add both kinds on event listener
+    // Add both kinds of event listener
     colorChangeOnPointerEnter();
     colorChangeOnTouch();
 }
 
-// Add pointer functionality (mouse or tap)
+// Pointer functionality (mouse or touch tap)
 function colorChangeOnPointerEnter() {
     const targets = document.querySelectorAll('.grid div');
     targets.forEach((target) => {
