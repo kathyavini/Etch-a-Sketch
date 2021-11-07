@@ -18,7 +18,7 @@ body {
 }
 
  .container {
-    max-height: 900px;
+    max-height: 1440px;
     max-width: 1440px;
     background-image: url("./right-background.png");
     background-size: cover;
@@ -113,9 +113,9 @@ main {
 }
 
 .options img {
-    width: 120px;
-    height: auto;
-    margin: 10px;
+    width: 100px;
+    height: 50px;
+    padding: 3px;
 }
 
 .options .selected {
@@ -169,6 +169,10 @@ footer img {
 
     header,
     footer {
+        align-self: center;
+    }
+
+    main {
         align-self: center;
     }
 

@@ -21,14 +21,44 @@ autumn.addEventListener('click', () => {
     setColorArray('autumn');
 });
 
-const theme = document.querySelector('.theme-palette');
-theme.addEventListener('click', () => {
+const july = document.querySelector('.july-palette');
+july.addEventListener('click', () => {
     clearGrid();
-    setColorArray('theme');
+    setColorArray('july');
 });
 
-// Start with the Theme Palette
-setColorArray('theme');
+const purple = document.querySelector('.purple-palette');
+purple.addEventListener('click', () => {
+    clearGrid();
+    setColorArray('purple');
+});
+
+const blue = document.querySelector('.blue-palette');
+blue.addEventListener('click', () => {
+    clearGrid();
+    setColorArray('blue');
+});
+
+const green = document.querySelector('.green-palette');
+green.addEventListener('click', () => {
+    clearGrid();
+    setColorArray('green');
+});
+
+// const blueGreen = document.querySelector('.blue-green-palette');
+// blueGreen.addEventListener('click', () => {
+//     clearGrid();
+//     setColorArray('blue-green');
+// });
+
+const squash = document.querySelector('.squash-palette');
+squash.addEventListener('click', () => {
+    clearGrid();
+    setColorArray('squash');
+});
+
+// Start with the Autumn Palette
+setColorArray('autumn');
 
 //Pick randomly from one of the two layouts upon load
 if (Math.floor(Math.random()*2)) {
@@ -47,6 +77,30 @@ function setColorArray(palette) {
         case 'theme':
             colorArray = ["#4d7558","#b3d686","#b9a67b","#C5DCCC","#739c55", "#F7F9F4", '#A5C092'];
             theme.classList.add('selected');
+            break;
+        case 'july':
+            colorArray = ["#fff75e","#fff056","#ffe94e","#ffe246","#ffda3d","#ffd53e","#fecf3e","#fdc43f","#fdbe39","#fdb833"];
+            july.classList.add('selected');
+            break;
+        case 'purple':
+            colorArray = ["#10002b","#240046","#3c096c","#5a189a","#7b2cbf","#9d4edd","#c77dff","#e0aaff"];
+            purple.classList.add('selected');
+            break;
+        case 'squash':
+            colorArray = ["#eca90c","#f3b53c","#e8a346","#dd8f53","#cc745e","#be5f67","#ae466d","#9d3271","#811d65","#7b1569"];
+            squash.classList.add('selected');
+            break;
+        case 'green':
+            colorArray = ["#d8f3dc","#b7e4c7","#95d5b2","#74c69d","#52b788","#40916c","#2d6a4f","#1b4332","#081c15"];
+            green.classList.add('selected');
+            break;
+        case 'blue':
+            colorArray = ["#ccdbfd","#c1d3fe","#abc4ff","#769ff8","#4179f1","#1b5eee"];
+            blue.classList.add('selected');
+            break;
+        case 'blue-green':
+            colorArray = ["#d9ed92","#b5e48c","#99d98c","#76c893","#52b69a","#34a0a4","#168aad","#1a759f","#1e6091","#184e77"];
+            blueGreen.classList.add('selected');
             break;
     }
 }
