@@ -61,8 +61,8 @@ eraser.addEventListener('click', () => {
     toggleEraserMode();
 });
 
-// Allow clicking (but not tapping!) to start and stop the mouseover effect
-grid.addEventListener("click", (ev) => {
+// Allow mouse/pen (but not touch!) to start and stop the mouseover effect
+grid.addEventListener("pointerdown", (ev) => {
     if (ev.pointerType !== "touch") {
         togglePointerEvents();
     } 
