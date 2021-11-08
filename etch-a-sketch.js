@@ -36,11 +36,6 @@ const green = document.querySelector('.green-palette');
 green.addEventListener('click', () => {
     setColorArray('green');
 });
-const blueGreen = document.querySelector('.blue-green-palette');
-blueGreen.addEventListener('click', () => {
-
-    setColorArray('blue-green');
-});
 const squash = document.querySelector('.squash-palette');
 squash.addEventListener('click', () => {
     setColorArray('squash');
