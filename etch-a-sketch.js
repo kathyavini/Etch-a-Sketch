@@ -1,4 +1,5 @@
 const grid = document.querySelector('.grid');
+let currentColorTheme;
 
 // Add event listeners to grid-layout buttons
 const grid9 = document.querySelector('.grid9');
@@ -17,45 +18,36 @@ grid25.addEventListener('click', () => {
 // Add event listeners to palette selectors
 const autumn = document.querySelector('.autumn-palette');
 autumn.addEventListener('click', () => {
-    clearGrid();
     setColorArray('autumn');
 });
-
 const july = document.querySelector('.july-palette');
 july.addEventListener('click', () => {
-    clearGrid();
     setColorArray('july');
 });
-
 const purple = document.querySelector('.purple-palette');
 purple.addEventListener('click', () => {
-    clearGrid();
     setColorArray('purple');
 });
-
 const blue = document.querySelector('.blue-palette');
 blue.addEventListener('click', () => {
-    clearGrid();
     setColorArray('blue');
 });
-
 const green = document.querySelector('.green-palette');
 green.addEventListener('click', () => {
-    clearGrid();
     setColorArray('green');
 });
+const blueGreen = document.querySelector('.blue-green-palette');
+blueGreen.addEventListener('click', () => {
 
-// const blueGreen = document.querySelector('.blue-green-palette');
-// blueGreen.addEventListener('click', () => {
-//     clearGrid();
-//     setColorArray('blue-green');
-// });
-
+    setColorArray('blue-green');
+});
 const squash = document.querySelector('.squash-palette');
 squash.addEventListener('click', () => {
-    clearGrid();
     setColorArray('squash');
 });
+
+/*-------- DEFAULTS WHEN LOADING --------*/
+/*---------------------------------------*/
 
 // Start with the Autumn Palette
 setColorArray('autumn');
@@ -65,9 +57,53 @@ if (Math.floor(Math.random()*2)) {
     changeLayout();
 }
 
+/*----------- ERASER FUNCTIONS --------*/
+/*--------------------------------------*/
+
+// Add event listener for eraser button
+const eraser = document.querySelector('.eraser');
+eraser.addEventListener('click', () => {
+    toggleEraserMode();
+});
+
+// Add eraser key toggle for computer users
+window.addEventListener("keydown", (ev) => {
+    if (ev.key === 'e') {
+        toggleEraserMode();
+    }
+});
+
+function toggleEraserMode() {
+    if (document.querySelector('.on')) {
+        eraser.classList.remove('on');
+        setColorArray(currentColorTheme);
+    } else {
+        setColorArray('erase');
+        eraser.classList.add('on');
+    } 
+}
+
+// Erase pixel with double-tap for touchscreen
+function eraseOnDoubleTap() {
+    let lastTouch = 0;
+    grid.addEventListener("touchstart", (ev) => {
+        currentTouch = ev.timeStamp;
+        if (currentTouch - lastTouch <= 300) {
+            document.elementFromPoint(ev.touches[0].clientX, ev.touches[0].clientY).style.backgroundColor = '';
+        } else {
+            lastTouch = currentTouch;
+        }
+    });
+}
+
+/*------------ CORE FUNCTIONS ----------*/
+/*--------------------------------------*/
 function setColorArray(palette) {
     while (document.querySelector('.selected')) {
         document.querySelector('.selected').classList.remove('selected');
+    }
+    if (document.querySelector('.on')) {
+        eraser.classList.remove('on');
     }
     switch(palette) {
         case 'autumn':
@@ -102,7 +138,11 @@ function setColorArray(palette) {
             colorArray = ["#d9ed92","#b5e48c","#99d98c","#76c893","#52b69a","#34a0a4","#168aad","#1a759f","#1e6091","#184e77"];
             blueGreen.classList.add('selected');
             break;
+        case 'erase':
+            colorArray = [""];
+            return;            
     }
+    currentColorTheme = palette;
 }
 
 function createGrid(n) {
@@ -113,19 +153,23 @@ function createGrid(n) {
         `repeat(${n}, 1fr) / repeat(${n}, 1fr)`;
     for (let i = 1; i <= n*n; i++) {
         let div = document.createElement('div');
-        // div.classList.add(`div${i}`); // Nice for troubleshooting
+        div.classList.add(`div${i}`); // Nice for troubleshooting
         div.classList.add(`generatedDiv`)
         grid.appendChild(div);
     }
-    // Add both kinds of event listener
+    // Add event listeners to grid
     colorChangeOnPointerEnter();
     colorChangeOnTouch();
+    eraseOnDoubleTap();
 }
 
 // Pointer functionality (mouse or touch tap)
 function colorChangeOnPointerEnter() {
     const targets = document.querySelectorAll('.grid div');
     targets.forEach((target) => {
+        // target.addEventListener('pointerenter', function() {
+        //     target.style.backgroundColor = pickColor();
+        // }, true);
         target.addEventListener('pointerenter', function() {
             target.style.backgroundColor = pickColor();
         });

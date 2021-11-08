@@ -62,6 +62,8 @@ header.layout2 {
 
 main {
     grid-area: board;
+    display: grid;
+    place-items: center;
 }
 
 .grid {
@@ -74,6 +76,30 @@ main {
 
 .grid div {
     border: 1px solid #b9a67b5a;
+}
+
+button {
+    background-color:#4D7558;
+    color: white;
+    width: 100px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+}
+
+.eraser {
+    margin-top: 20px;
+    width: 180px;
+    height: 40px;
+}
+
+.eraser:active {
+    background-color:#223327;
+}
+
+.eraser.on {
+    outline: 2px solid black;
+    outline-offset: 2px;
 }
 
  .options {
@@ -103,15 +129,6 @@ main {
     margin: 20px 0px 40px 0px;
 }
 
-.options button {
-    background-color:#4D7558;
-    color: white;
-    width: 100px;
-    padding: 10px 20px;
-    border-radius: 5px;
-    border: none;
-}
-
 .options img {
     width: 100px;
     height: 50px;
@@ -123,8 +140,8 @@ main {
 }
 
 footer {
-    align-self: end;
     grid-area: attrb;
+    align-self: end;
     display: flex;
     flex-flow: column nowrap;
     flex: 1 0 auto;
@@ -153,6 +170,13 @@ footer img {
     width: auto;
 }
 
+/* Don't yet have a good place for these in the larger layouts.
+Will probably move into a menu later */
+.keyboard-instructions,
+.touchscreen-instructions {
+    display: none;
+}
+
 /* For medium screens */
 @media screen and (max-width: 1200px) {
     .container,
@@ -164,7 +188,22 @@ footer img {
         grid-template-areas:
             "... title     title       ..."
             "... board     options     ..."
-            "... attrb     options     ...";
+            "... attrb     ...         ...";
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .container,
+    .container.layout2 {
+        width: 100%;
+        min-height: auto;
+        grid-template-columns: 1fr 6fr 4fr 1fr;
+        grid-template-rows: 3fr 6fr 1fr;
+        grid-template-areas:
+            "... title     title   ..."
+            "... board     options ..."
+            "... attrb     ...     ...";
+        place-items: center;
     }
 
     header,
@@ -174,6 +213,7 @@ footer img {
 
     main {
         align-self: center;
+        justify-content: center;
     }
 
 }
@@ -198,7 +238,7 @@ footer img {
         display: flex;
         flex-flow: column nowrap;
         align-items: center;
-        gap: 5vw;
+        /* gap: 5vw; */
         overflow-y: auto;
         overflow-x: auto;
         scroll-snap-type: y mandatory;
@@ -209,7 +249,7 @@ footer img {
         scroll-snap-align: start;
         flex: none;
         /* decrease padding as system font size increases */
-        padding-top: calc(30vh - 3rem);
+        padding-top: calc(40vh - 6rem);
         font-size: 2rem;
         order: 0;
     }
@@ -217,14 +257,19 @@ footer img {
     .palette {
         order: 1;
         /* decrease padding as system font size increases */
-        padding-top: calc(30vh - 6rem);
+        padding-top: calc(30vh - 5rem);
+        padding-bottom: calc(20vh - 5rem);
     }
+
 
     .dimensions {
         order: 2;
         scroll-snap-align: start;
-        padding-top: 10vh;
-        margin-top: 15vh;
+        padding-top: calc(20vh - 3rem)
+    }
+
+    .grid-buttons {
+        margin: 5px 0px 30px 0px;
     }
 
     main {
@@ -246,5 +291,30 @@ footer img {
         scroll-snap-align: start;
         flex: none;
         order: 3;
+    }
+
+    /* Device-specific instructions */
+    /* Right now only displaying on min-width layout */
+    @media (hover: hover) {
+        .keyboard-instructions {
+            display: block;
+            padding: 0vh 10vw 20vh 10vw;
+        }
+
+        .touchscreen-instructions {
+            display: none;
+            padding-bottom: 20vh;
+        }
+    }
+
+    @media (hover: none) {
+        .touchscreen-instructions {
+            display: block;
+            padding: 0vh 10vw 20vh 10vw;
+        }
+
+        .keyboard-instructions {
+            display: none;
+        }
     }
 }
