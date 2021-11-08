@@ -1,5 +1,12 @@
 const grid = document.querySelector('.grid');
 let currentColorTheme;
+let pointerEntryModeActive = true;
+let pointerActiveBeforeErase;
+
+//Pick randomly from one of the two layouts upon load
+if (Math.floor(Math.random()*2)) {
+    changeLayout();
+}
 
 // Add event listeners to grid-layout buttons
 const grid9 = document.querySelector('.grid9');
@@ -41,16 +48,9 @@ squash.addEventListener('click', () => {
     setColorArray('squash');
 });
 
-/*-------- DEFAULTS WHEN LOADING --------*/
-/*---------------------------------------*/
-
 // Start with the Autumn Palette
 setColorArray('autumn');
 
-//Pick randomly from one of the two layouts upon load
-if (Math.floor(Math.random()*2)) {
-    changeLayout();
-}
 
 /*----------- ERASER FUNCTIONS --------*/
 /*--------------------------------------*/
@@ -61,21 +61,64 @@ eraser.addEventListener('click', () => {
     toggleEraserMode();
 });
 
-// Add eraser key toggle for computer users
-window.addEventListener("keydown", (ev) => {
-    if (ev.key === 'e') {
-        toggleEraserMode();
-    }
+// Allow clicking (but not tapping!) to start and stop the mouseover effect
+grid.addEventListener("click", (ev) => {
+    if (ev.pointerType !== "touch") {
+        togglePointerEvents();
+    } 
 });
 
 function toggleEraserMode() {
+    // If eraser is being turned off
     if (document.querySelector('.on')) {
         eraser.classList.remove('on');
         setColorArray(currentColorTheme);
+        // Restore previous pointer setting
+        if (!pointerActiveBeforeErase) {
+            // turn it back off
+            togglePointerEvents();
+        }
     } else {
+        // Turn on pointer events when you turn on eraser
+        if (!pointerEntryModeActive) {
+            togglePointerEvents();
+        // but save previous setting
+            pointerActiveBeforeErase = false;
+        } else {
+            pointerActiveBeforeErase = true;
+        }
         setColorArray('erase');
         eraser.classList.add('on');
-    } 
+    }
+}
+
+// Add keyboard shortcuts:
+// Space to toggle mouseover events
+// E for eraser mode
+window.addEventListener("keydown", (ev) => {
+    switch(ev.key) {
+        case ' ':
+            ev.preventDefault();
+            togglePointerEvents();
+            break;
+        case 'e':
+            toggleEraserMode();
+            break;
+    }
+});
+
+function togglePointerEvents() {
+    if (pointerEntryModeActive) {
+        const targets = document.querySelectorAll('.grid div');
+        targets.forEach((target) => {
+            target.style.pointerEvents = 'none';})
+        pointerEntryModeActive = false;
+    } else {
+        const targets = document.querySelectorAll('.grid div');
+        targets.forEach((target) => {
+            target.style.pointerEvents = 'auto';})
+        pointerEntryModeActive = true;
+    }
 }
 
 // Erase pixel with double-tap for touchscreen
