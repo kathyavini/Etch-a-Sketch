@@ -14,6 +14,14 @@
 </head>
 <body>
     <div class="container">
+        <div class="bg-theme-toggle">
+            <p>Background</p>
+            <label class="bg-toggle" for="checkbox">
+                <input type="checkbox" id="checkbox">
+                <div class="bg-toggle-slider"></div>
+
+            </label>
+        </div>
         <header>
             <h1>Etch-a-Sketch</h1>
         </header>
@@ -43,20 +51,17 @@
                 <img class="squash-palette" src="./squash-palette.png" alt="Purple-Orange Color Palette">
             </div>
         </div>
-
-        <footer>
+        <div class="instructions">
+            <!-- <h2>Instructions</h2> -->
             <div class="touchscreen-instructions">
-                <h2>Instructions:</h2>
                 <p>Double-tap to erase a single pixel</p>
-                <br>
-                <p>Toggle eraser mode by pressing "E" or using the Eraser Mode button.</p>
             </div>
             <div class="keyboard-instructions">
-                <h2>Instructions:</h2>
-                <p>Toggle eraser mode by pressing "E" or using the Eraser Mode button</p>
-                <br>
-                <p>Toggle pixel painting mode pressing Space or clicking within the grid</p>
+                <p>Toggle eraser mode with "E"</p>
+                <p>Toggle pixel painting with space or by clicking in the grid</p>
             </div>
+        </div>
+        <footer>
             <div class="attributions">
                 <p>Made by <a href="https://www.github.com/kathyavini">Kathyavini <img alt="GitHub Logo" src="./github.svg"></a></p>
                 <p>Background by <a href='https://www.freepik.com/lukasdedi'>@lukasdedi</a></p>

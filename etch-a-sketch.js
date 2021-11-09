@@ -3,11 +3,6 @@ let currentColorTheme;
 let pointerEntryModeActive = true;
 let pointerActiveBeforeErase;
 
-//Pick randomly from one of the two layouts upon load
-if (Math.floor(Math.random()*2)) {
-    changeLayout();
-}
-
 // Add event listeners to grid-layout buttons
 const grid9 = document.querySelector('.grid9');
 grid9.addEventListener('click', () => {
@@ -51,6 +46,13 @@ squash.addEventListener('click', () => {
 // Start with the Autumn Palette
 setColorArray('autumn');
 
+// Add event listener to the background switcher
+const bgSwitch = document.querySelector('input');
+bgSwitch.addEventListener('change', () => {
+	changeLayout();
+});
+
+
 
 /*----------- ERASER FUNCTIONS --------*/
 /*--------------------------------------*/
@@ -68,33 +70,7 @@ grid.addEventListener("pointerdown", (ev) => {
     } 
 });
 
-function toggleEraserMode() {
-    // If eraser is being turned off
-    if (document.querySelector('.on')) {
-        eraser.classList.remove('on');
-        setColorArray(currentColorTheme);
-        // Restore previous pointer setting
-        if (!pointerActiveBeforeErase) {
-            // turn it back off
-            togglePointerEvents();
-        }
-    } else {
-        // Turn on pointer events when you turn on eraser
-        if (!pointerEntryModeActive) {
-            togglePointerEvents();
-        // but save previous setting
-            pointerActiveBeforeErase = false;
-        } else {
-            pointerActiveBeforeErase = true;
-        }
-        setColorArray('erase');
-        eraser.classList.add('on');
-    }
-}
-
-// Add keyboard shortcuts:
-// Space to toggle mouseover events
-// E for eraser mode
+// Add keyboard shortcuts for both
 window.addEventListener("keydown", (ev) => {
     switch(ev.key) {
         case ' ':
@@ -121,6 +97,30 @@ function togglePointerEvents() {
     }
 }
 
+function toggleEraserMode() {
+    // If eraser is being turned off
+    if (document.querySelector('.on')) {
+        eraser.classList.remove('on');
+        setColorArray(currentColorTheme);
+        // Restore previous pointer setting
+        if (!pointerActiveBeforeErase) {
+            // turn it back off
+            togglePointerEvents();
+        }
+    } else {
+        // Turn on pointer events when you turn on eraser
+        if (!pointerEntryModeActive) {
+            togglePointerEvents();
+        // but save previous setting
+            pointerActiveBeforeErase = false;
+        } else {
+            pointerActiveBeforeErase = true;
+        }
+        setColorArray('erase');
+        eraser.classList.add('on');
+    }
+}
+
 // Erase pixel with double-tap for touchscreen
 function eraseOnDoubleTap() {
     let lastTouch = 0;
@@ -137,9 +137,11 @@ function eraseOnDoubleTap() {
 /*------------ CORE FUNCTIONS ----------*/
 /*--------------------------------------*/
 function setColorArray(palette) {
+    // Remove selection from previous theme
     while (document.querySelector('.selected')) {
         document.querySelector('.selected').classList.remove('selected');
     }
+    // Turn off eraser
     if (document.querySelector('.on')) {
         eraser.classList.remove('on');
     }
@@ -191,7 +193,7 @@ function createGrid(n) {
         `repeat(${n}, 1fr) / repeat(${n}, 1fr)`;
     for (let i = 1; i <= n*n; i++) {
         let div = document.createElement('div');
-        div.classList.add(`div${i}`); // Nice for troubleshooting
+        // div.classList.add(`div${i}`); // Nice for troubleshooting
         div.classList.add(`generatedDiv`)
         grid.appendChild(div);
     }
@@ -243,12 +245,9 @@ function clearGrid() {
 
 // Toggle between two layouts
 function changeLayout() {
-    const container = document.querySelector('.container');
-    const header = document.querySelector('header');
-    const options = document.querySelector('.options');
-    const footer = document.querySelector('footer');
-    container.classList.toggle('layout2');
-    header.classList.toggle('layout2');
-    options.classList.toggle('layout2');
-    footer.classList.toggle('layout2');
+    document.querySelector('.container').classList.toggle('layout2');
+    document.querySelector('header').classList.toggle('layout2');
+    document.querySelector('.options').classList.toggle('layout2');
+    document.querySelector('footer').classList.toggle('layout2');
+    document.querySelector('.instructions').classList.toggle('layout2');
 }

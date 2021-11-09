@@ -26,11 +26,14 @@ body {
     background-position: top;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 3fr 6fr 1fr;
+    grid-template-rows: 1fr 2fr 1fr 6fr 1fr 1fr;
     grid-template-areas:
+        "....    .....   toggle"
         ".....   title   title"
+        ".....   board   options"
+        "instr  board   options"
         "attrb   board   options"
-        ".....   .....   .......";
+        "...     ....    ....";
     text-align: center;
     font-family: 'Montserrat', sans-serif;
     font-size: 1.5rem;
@@ -43,17 +46,20 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: top;
+    grid-template-rows: 1fr 2fr 1fr 6fr 1fr 1fr;
     grid-template-areas:
-        ".....  .....   ...."
+        ".....   .....  toggle"
+        "....   ......  ......"
         "title  board   options"
-        "....   .....   attrb";
+        "title  board   options"
+        "instr instr    attrb"
+        "instr instr    attrb";
 }
 
  header {
     font-family: 'Cormorant', serif;
     font-size: clamp(2.5rem, 6vw, 3rem);
     grid-area: title;
-    padding-top: 10vh;
 }
 
 header.layout2 {
@@ -62,8 +68,10 @@ header.layout2 {
 
 main {
     grid-area: board;
-    display: grid;
-    place-items: center;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
 }
 
 .grid {
@@ -106,18 +114,17 @@ button {
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
     grid-area: options;
 }
 
 .options.layout2 {
-    justify-content: center;
     align-self: center;
 }
 
 .options h2 {
     color: #6F6F6F;
-    font-size: clamp(2rem, 4vw, 2.5rem) ;
+    font-size: clamp(2rem, 4vw, 2.5rem);
     text-transform: uppercase;
 }
 
@@ -137,6 +144,26 @@ button {
 
 .options .selected {
     border: 2px black solid;
+}
+
+.instructions {
+    grid-area: instr;
+    justify-self: center;
+    align-self: end;
+    max-width: 250px;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 10px;
+}
+
+.instructions.layout2 {
+    grid-area: instr;
+    align-self: center;
+    display: flex;
+    flex-flow: column nowrap;
+    max-width: none;
+    margin-left: 20px;
+    margin-bottom: 10px;
 }
 
 footer {
@@ -170,12 +197,50 @@ footer img {
     width: auto;
 }
 
-/* Don't yet have a good place for these in the larger layouts.
-Will probably move into a menu later */
-.keyboard-instructions,
-.touchscreen-instructions {
+
+
+/* Background toggle slider */
+.bg-theme-toggle {
+    grid-area: toggle;
+    place-self: center;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    color: #b9a67b;
+}
+
+.bg-toggle {
+    height: 20px;
+    width: 80px;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow:0px 0px 5px rgba(0,0,0, .5);
+}
+
+.bg-toggle input {
     display: none;
 }
+
+.bg-toggle-slider {
+    box-shadow: 0px 0px 5px rgba(0,0,0, .4);
+    background-color: #739c55;
+    height: 40px;
+    width: 40px;
+    border-radius: 40px;
+    transform: translateX(0px);
+	transition: transform 0.2s linear;
+  }
+  
+  input:checked + .bg-toggle-slider {
+    background-color: #b9a67b;
+    transform: translateX(45px);
+  }
 
 /* For medium screens */
 @media screen and (max-width: 1200px) {
@@ -184,35 +249,59 @@ Will probably move into a menu later */
         width: 100%;
         min-height: auto;
         grid-template-columns: 1fr 3fr 2fr 1fr;
-        grid-template-rows: 3fr 6fr 1fr;
+        grid-template-rows: 1fr 2fr 6fr 2fr 1fr 1fr;
         grid-template-areas:
+            "...  ....     .....      ..."
             "... title     title       ..."
-            "... board     options     ..."
-            "... attrb     ...         ...";
+            "... board     options    options"
+            "instr instr     instr      instr"
+            "toggle toggle  toggle    toggle"
+            "attrb  attrb    attrb      attrb";
+        place-items: center;
+    }
+
+    .instructions,
+    .instructions.layout2 {
+        text-align: center;
+        justify-self: center;
+        align-self: end;
+        margin-left: 0;
+        margin-bottom: 0;
+        max-width: none;
     }
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 900px) {
     .container,
     .container.layout2 {
         width: 100%;
         min-height: auto;
         grid-template-columns: 1fr 6fr 4fr 1fr;
-        grid-template-rows: 3fr 6fr 1fr;
+        grid-template-rows: 1fr 2fr 6fr 2fr 1fr 1fr;
         grid-template-areas:
-            "... title     title   ..."
-            "... board     options ..."
-            "... attrb     ...     ...";
+            "....   ....     ...    ...."
+            "...    title     title    ...."
+            "...    board     options  options"
+            "instr  instr     instr    ...."
+            "toggle toggle     toggle  ....."
+            "attrb  attrb     attrb    ....";
         place-items: center;
     }
 
-    header,
-    footer {
-        align-self: center;
+
+    .options img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .bg-theme-toggle {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: center;
     }
 
     main {
-        align-self: center;
         justify-content: center;
     }
 
@@ -238,7 +327,6 @@ Will probably move into a menu later */
         display: flex;
         flex-flow: column nowrap;
         align-items: center;
-        /* gap: 5vw; */
         overflow-y: auto;
         overflow-x: auto;
         scroll-snap-type: y mandatory;
@@ -246,26 +334,32 @@ Will probably move into a menu later */
 
     header {
         width: 100vw;
+        height: 55vh;
         scroll-snap-align: start;
-        flex: none;
+        flex: 0 0 auto;
         /* decrease padding as system font size increases */
-        padding-top: calc(40vh - 6rem);
+        padding-top: 20vh;
         font-size: 2rem;
         order: 0;
     }
 
     .palette {
         order: 1;
+        height: 45vh;
         /* decrease padding as system font size increases */
-        padding-top: calc(30vh - 5rem);
-        padding-bottom: calc(20vh - 5rem);
     }
 
+    .options img {
+        width: 100px;
+        height: 50px;
+    }
 
     .dimensions {
         order: 2;
         scroll-snap-align: start;
-        padding-top: calc(20vh - 3rem)
+        padding-top: 5vh;
+        height: 20vh;
+        flex: 0 0 auto;
     }
 
     .grid-buttons {
@@ -274,10 +368,10 @@ Will probably move into a menu later */
 
     main {
         width: 100vw;
-        flex: none;
-        display: grid;
-        place-items: center;
+        height: 80vh;
+        flex: 0 0 auto;
         order: 2;
+        padding-bottom: 10vh;
     }
 
     .grid {
@@ -285,36 +379,65 @@ Will probably move into a menu later */
         max-height: 90vw;
     }
 
+    .instructions,
+    .instructions.layout2 {
+        margin: 0;
+        padding: 0;
+        place-self: center;
+        width: 100vw;
+        height: 50vh;
+        flex: 0 0 auto;
+        scroll-snap-align: start;
+        order: 3;
+        flex-flow: column nowrap;
+        text-align: center;
+        justify-content: space-around;
+        padding-top: 20vh;
+    }
+
+    .bg-theme-toggle {
+        width: 100vw;
+        height: 20vh;
+        flex: 0 0 auto;
+        order: 4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #b9a67b;
+    }
+
     footer {
         width: 100vw;
-        height: 100vh;
-        scroll-snap-align: start;
-        flex: none;
-        order: 3;
+        height: 30vh;
+        flex: 0 0 auto;
+        order: 5;
+        padding-bottom: 20vh;
     }
 
-    /* Device-specific instructions */
-    /* Right now only displaying on min-width layout */
-    @media (hover: hover) {
-        .keyboard-instructions {
-            display: block;
-            padding: 0vh 10vw 20vh 10vw;
-        }
+}
 
-        .touchscreen-instructions {
-            display: none;
-            padding-bottom: 20vh;
-        }
+/* Device-specific instructions */
+@media (hover: hover) {
+    .keyboard-instructions {
+        display: flex;
+        flex-flow: column wrap;
+        gap: 10px;
     }
 
-    @media (hover: none) {
-        .touchscreen-instructions {
-            display: block;
-            padding: 0vh 10vw 20vh 10vw;
-        }
-
-        .keyboard-instructions {
-            display: none;
-        }
+    .touchscreen-instructions {
+        display: none;
     }
 }
+
+@media (hover: none) {
+    .touchscreen-instructions {
+        display: flex;
+        flex-flow: column wrap;
+        gap: 10px;
+    }
+
+    .keyboard-instructions {
+        display: none;
+    }
+}
+
