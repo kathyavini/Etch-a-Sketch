@@ -30,17 +30,17 @@ const purple = document.querySelector('.purple-palette');
 purple.addEventListener('click', () => {
     setColorArray('purple');
 });
-const blue = document.querySelector('.blue-palette');
-blue.addEventListener('click', () => {
-    setColorArray('blue');
-});
 const green = document.querySelector('.green-palette');
 green.addEventListener('click', () => {
     setColorArray('green');
 });
-const squash = document.querySelector('.squash-palette');
-squash.addEventListener('click', () => {
-    setColorArray('squash');
+const blue = document.querySelector('.blue-palette');
+blue.addEventListener('click', () => {
+    setColorArray('blue');
+});
+const brownTan = document.querySelector('.brown-tan-palette');
+brownTan.addEventListener('click', () => {
+    setColorArray('brown-tan');
 });
 
 // Start with the Autumn Palette
@@ -150,10 +150,6 @@ function setColorArray(palette) {
             colorArray = ["#03071e","#370617","#6a040f","#9d0208","#d00000","#dc2f02","#e85d04","#f48c06","#faa307","#ffba08"];
             autumn.classList.add('selected');
             break;
-        case 'theme':
-            colorArray = ["#4d7558","#b3d686","#b9a67b","#C5DCCC","#739c55", "#F7F9F4", '#A5C092'];
-            theme.classList.add('selected');
-            break;
         case 'july':
             colorArray = ["#fff75e","#fff056","#ffe94e","#ffe246","#ffda3d","#ffd53e","#fecf3e","#fdc43f","#fdbe39","#fdb833"];
             july.classList.add('selected');
@@ -161,10 +157,6 @@ function setColorArray(palette) {
         case 'purple':
             colorArray = ["#10002b","#240046","#3c096c","#5a189a","#7b2cbf","#9d4edd","#c77dff","#e0aaff"];
             purple.classList.add('selected');
-            break;
-        case 'squash':
-            colorArray = ["#eca90c","#f3b53c","#e8a346","#dd8f53","#cc745e","#be5f67","#ae466d","#9d3271","#811d65","#7b1569"];
-            squash.classList.add('selected');
             break;
         case 'green':
             colorArray = ["#d8f3dc","#b7e4c7","#95d5b2","#74c69d","#52b788","#40916c","#2d6a4f","#1b4332","#081c15"];
@@ -174,9 +166,9 @@ function setColorArray(palette) {
             colorArray = ["#ccdbfd","#c1d3fe","#abc4ff","#769ff8","#4179f1","#1b5eee"];
             blue.classList.add('selected');
             break;
-        case 'blue-green':
-            colorArray = ["#d9ed92","#b5e48c","#99d98c","#76c893","#52b69a","#34a0a4","#168aad","#1a759f","#1e6091","#184e77"];
-            blueGreen.classList.add('selected');
+        case 'brown-tan':
+            colorArray = ["#1a120e","#33261f","#4b3b30","#645140","#7b6751","#937e62","#a89475","#bcaa87","#d4c197","#ebd8a7"];
+            brownTan.classList.add('selected');
             break;
         case 'erase':
             colorArray = [""];
