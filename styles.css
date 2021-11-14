@@ -95,17 +95,17 @@ button {
     border: none;
 }
 
-.eraser {
-    margin-top: 20px;
-    width: 180px;
-    height: 40px;
-}
-
-.eraser:active {
+button:active {
     background-color:#223327;
 }
 
-.eraser.on {
+main button {
+    margin: 20px 10px 0px 10px;
+    width: 150px;
+}
+
+.eraser.on,
+.shading.active {
     outline: 2px solid black;
     outline-offset: 2px;
 }
@@ -150,7 +150,7 @@ button {
     grid-area: instr;
     justify-self: center;
     align-self: end;
-    max-width: 250px;
+    max-width: 275px;
     display: flex;
     flex-flow: column nowrap;
     gap: 10px;
@@ -228,7 +228,6 @@ footer img {
 }
 
 .bg-toggle-slider {
-    box-shadow: 0px 0px 5px rgba(0,0,0, .4);
     background-color: #739c55;
     height: 40px;
     width: 40px;
@@ -269,6 +268,10 @@ footer img {
         margin-bottom: 0;
         max-width: none;
     }
+
+    footer {
+        align-self: center;
+    }
 }
 
 @media screen and (max-width: 900px) {
@@ -287,7 +290,6 @@ footer img {
             "attrb  attrb     attrb    ....";
         place-items: center;
     }
-
 
     .bg-theme-toggle {
         display: flex;
@@ -332,7 +334,6 @@ footer img {
         height: 55vh;
         scroll-snap-align: start;
         flex: 0 0 auto;
-        /* decrease padding as system font size increases */
         padding-top: 20vh;
         font-size: 2rem;
         order: 0;
@@ -341,7 +342,6 @@ footer img {
     .palette {
         order: 1;
         height: 45vh;
-        /* decrease padding as system font size increases */
     }
 
     .dimensions {
