@@ -4,6 +4,7 @@ let pointerEntryModeActive = true;
 let shadingMode = false;
 let pointerActiveBeforeErase;
 let shadingActiveBeforeErase;
+let lastDiv;
 
 // Add event listeners to grid-layout buttons
 const grid9 = document.querySelector('.grid9');
@@ -239,16 +240,15 @@ function colorChangeOnPointerEnter() {
 
 // Touch functionality
 function colorChangeOnTouch() {
-    let lastDiv;
     grid.addEventListener("touchmove", (ev) => {
         touchedDiv = document.elementFromPoint(ev.touches[0].clientX, 
                 ev.touches[0].clientY);
                 if (touchedDiv && touchedDiv.classList.contains('generatedDiv') && 
-                !(touchedDiv === lastDiv)) {
-                    newColorAndIndex = pickColor(touchedDiv.index);
-                    touchedDiv.style.backgroundColor = newColorAndIndex[0];
-                    touchedDiv.index = newColorAndIndex[1];
-                    lastDiv = touchedDiv;
+                    !(touchedDiv === lastDiv)) {
+                        newColorAndIndex = pickColor(touchedDiv.index);
+                        touchedDiv.style.backgroundColor = newColorAndIndex[0];
+                        touchedDiv.index = newColorAndIndex[1];
+                        lastDiv = touchedDiv;
                 }
     });
 }
@@ -257,7 +257,6 @@ function pickColor(index) {
     // Step through the palette if in shading mode
     if (shadingMode) {
         index = Math.min(index, colorArray.length - 1);
-        console.log(index);
         let color = colorArray[index];
         index++;
         return [color, index];
@@ -273,7 +272,8 @@ function clearGrid() {
     const targets = document.querySelectorAll('.grid div');
     // Clear background colors from the grid
     targets.forEach((target) => { 
-        target.style.backgroundColor = ''; })
+        target.style.backgroundColor = '';
+        target.index = 0; })
 }
 
 // Toggle between two layouts
